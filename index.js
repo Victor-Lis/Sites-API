@@ -72,13 +72,18 @@ const sites = [
     },
 ]
 
+const tipos = []
+sites.map(site => {
+
+    if(!tipos.includes(site.tipo)){
+
+        tipos.push(site.tipo)
+
+    }
+
+})
+
 const methods = [
-    {
-
-        metodo: "/sites/",
-        resultado: "Retorna todas os sites",
-
-    },
     {
 
         metodo: `/sites/{${sites.map((site, index) => {return " "+index})} }`,
@@ -87,16 +92,20 @@ const methods = [
     },
     {
 
-        metodo: `/sites?tipo={${sites.map(site => {
-            return " "+site.tipo
-        })} }`,
+        metodo: `/sites?tipo={${
+            
+            tipos.map(tipo => {
+                return " "+tipo
+            })
+        
+        } }`,
         resultado: "Retorna todos os sites que tem seu tipo igual ao pedido na url"
 
     },
     {
 
         metodo: `/sites?all=True`,
-        resultado: "Retorna todos os sites"
+        resultado: `Retorna todos os sites, não compatível com 'tipo'`
 
     },
     {
